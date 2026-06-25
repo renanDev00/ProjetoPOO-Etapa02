@@ -11,6 +11,13 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
+    public Pessoa(String nome, String cpf, int idade, String telefone) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.idade = idade;
+        this.telefone = telefone;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -41,6 +48,10 @@ public abstract class Pessoa {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public boolean possuiCpfPreenchido() {
+        return this.cpf != null && !this.cpf.trim().isEmpty();
     }
 
     public abstract void exibirResumo();
