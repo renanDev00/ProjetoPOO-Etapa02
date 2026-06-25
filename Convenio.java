@@ -1,3 +1,5 @@
+package br.com.vidaplena.model.pessoas;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -6,6 +8,10 @@ public class Convenio {
     private String nome;
     private String cnpj;
     private double percentualCobertura;
+    
+    // Justificativa da Coleção:
+    // HashSet<String>: escolhido pois precisamos apenas verificar a existência 
+    // de uma especialidade sem duplicatas, não precisamos da ordenação.
     private Set<String> especialidadesCobertas;
 
     public Convenio(String nome, String cnpj, double percentualCobertura) {
@@ -14,6 +20,7 @@ public class Convenio {
         this.setPercentualCobertura(percentualCobertura);
         this.especialidadesCobertas = new HashSet<>();
     }
+
     public String getNome() {
         return nome;
     }
