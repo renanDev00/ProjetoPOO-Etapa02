@@ -10,8 +10,8 @@ public class Convenio {
     private double percentualCobertura;
     
     // Justificativa da Coleção:
-    // HashSet<String>: escolhido pois precisamos apenas verificar a existência 
-    // de uma especialidade sem duplicatas, não precisamos da ordenação.
+    // HashSet<String>: escolhi esse pois precisamos apenas verificar a existência (contains) 
+    // de uma especialidade sem duplicatas, não precisamos de ordenação.
     private Set<String> especialidadesCobertas;
 
     public Convenio(String nome, String cnpj, double percentualCobertura) {
@@ -19,6 +19,15 @@ public class Convenio {
         this.setCnpj(cnpj);
         this.setPercentualCobertura(percentualCobertura);
         this.especialidadesCobertas = new HashSet<>();
+    }
+
+    public Convenio(String nome, String cnpj, double percentualCobertura, Set<String> especialidades) {
+        this(nome, cnpj, percentualCobertura);
+        if (especialidades != null) {
+            for (String esp : especialidades) {
+                this.adicionarEspecialidade(esp);
+            }
+        }
     }
 
     public String getNome() {
@@ -67,5 +76,9 @@ public class Convenio {
     public boolean cobreEspecialidade(String especialidade) {
         if (especialidade == null) return false;
         return this.especialidadesCobertas.contains(especialidade.toLowerCase());
+    }
+
+    public String obterDadosFormatados() {
+        return nome + " (CNPJ: " + cnpj + " | Cobertura: " + percentualCobertura + "%)";
     }
 }
