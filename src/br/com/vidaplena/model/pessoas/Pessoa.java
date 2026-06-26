@@ -11,7 +11,7 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
-    // Sobrecarga. Mesmo nome, parâmetros diferentes (resolvido em tempo de compilação).
+    // SOBRECARGA: Mesmo nome, parâmetros diferentes (resolvido em tempo de compilação).
     public Pessoa(String nome, String cpf, int idade, String telefone) {
         this.nome = nome;
         this.cpf = cpf;
