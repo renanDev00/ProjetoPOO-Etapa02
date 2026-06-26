@@ -2,6 +2,7 @@ package br.com.vidaplena.model.pessoas;
 
 public class Paciente extends Pessoa {
 
+    // ASSOCIAÇÃO: Paciente conhece Convenio, mas ambos existem independentemente
     private Convenio convenio;
     private boolean ativo;
 
@@ -79,6 +80,7 @@ public class Paciente extends Pessoa {
         this.ativo = false;
     }
 
+    // SOBRESCRITA: mesmo nome e parâmetros, classe filha redefine comportamento (resolvido em tempo de execução)
     @Override
     public void exibirResumo() {
         String status = ativo ? "Sim" : "Não";
