@@ -9,9 +9,8 @@ public class Convenio {
     private String cnpj;
     private double percentualCobertura;
     
-    // Justificativa da Coleção:
-    // HashSet<String>: escolhi esse pois precisamos apenas verificar a existência (contains) 
-    // de uma especialidade sem duplicatas, não precisamos de ordenação.
+    // JUSTIFICAÇÃO DA COLEÇÃO:
+    // HashSet<String>: apenas verificação de existência (contains); não precisa de ordem.
     private Set<String> especialidadesCobertas;
 
     public Convenio(String nome, String cnpj, double percentualCobertura) {
