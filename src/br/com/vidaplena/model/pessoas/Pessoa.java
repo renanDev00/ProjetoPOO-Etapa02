@@ -11,7 +11,7 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
-    // SOBRECARGA: Mesmo nome, parâmetros diferentes (resolvido em tempo de compilação).
+    // SOBRECARGA: mesmo nome, parâmetros diferentes (resolvido em tempo de compilação).
     public Pessoa(String nome, String cpf, int idade, String telefone) {
         this.nome = nome;
         this.cpf = cpf;
@@ -24,6 +24,9 @@ public abstract class Pessoa {
     }
 
     public void setNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome não pode ser nulo ou vazio.");
+        }
         this.nome = nome;
     }
 
