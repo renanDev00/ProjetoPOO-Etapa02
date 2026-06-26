@@ -7,16 +7,23 @@ public class Paciente extends Pessoa {
 
     public Paciente(String nome, String cpf) {
         super(nome, cpf);
+        this.setAvisoValidarCpf(cpf);
         this.ativo = true;
     }
 
     public Paciente(String nome, String cpf, int idade, String telefone) {
-        super(nome, cpf, idade, telefone);
+        super(nome, cpf);
+        this.setAvisoValidarCpf(cpf);
+        this.setIdade(idade);
+        this.setTelefone(telefone);
         this.ativo = true;
     }
 
     public Paciente(String nome, String cpf, int idade, String telefone, Convenio convenio) {
-        super(nome, cpf, idade, telefone);
+        super(nome, cpf);
+        this.setAvisoValidarCpf(cpf);
+        this.setIdade(idade);
+        this.setTelefone(telefone);
         this.convenio = convenio;
         this.ativo = true;
     }
@@ -35,6 +42,26 @@ public class Paciente extends Pessoa {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    @Override
+    public void setCpf(String cpf) {
+        this.setAvisoValidarCpf(cpf);
+    }
+
+    @Override
+    public void setIdade(int idade) {
+        if (idade < 0) {
+            throw new IllegalArgumentException("A idade nao pode ser negativa.");
+        }
+        this.idade = idade;
+    }
+
+    private void setAvisoValidarCpf(String cpf) {
+        if (cpf == null || cpf.trim().isEmpty()) {
+            throw new IllegalArgumentException("O CPF nao pode ser nulo ou vazio.");
+        }
+        this.cpf = cpf;
     }
 
     public void complementar(int idade, String telefone) {
