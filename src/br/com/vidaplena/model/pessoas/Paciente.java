@@ -62,7 +62,7 @@ public class Paciente extends Pessoa {
         if (cpf == null || cpf.trim().isEmpty()) {
             throw new IllegalArgumentException("O CPF nao pode ser nulo ou vazio.");
         }
-        super.setCpf(cpf); // Alteração feita aqui! Delegando para a superclasse.
+        super.setCpf(cpf);
     }
 
     public void complementar(int idade, String telefone) {
