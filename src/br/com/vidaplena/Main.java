@@ -3,8 +3,14 @@ package br.com.vidaplena;
 import br.com.vidaplena.model.pessoas.Paciente;
 import br.com.vidaplena.service.ClinicaServico;
 
+import br.com.vidaplena.exceptions.ConsultaInvalidaException;
+import br.com.vidaplena.exceptions.ConvenioNaoCobreException;
+import br.com.vidaplena.exceptions.HorarioIndisponivelException;
+import br.com.vidaplena.exceptions.LimiteParcelasExcedidoException;
 import br.com.vidaplena.exceptions.OperacaoInvalidaException;
+import br.com.vidaplena.exceptions.PacienteInativoException;
 import br.com.vidaplena.exceptions.PacienteNaoEncontradoException;
+import br.com.vidaplena.exceptions.ProfissionalNaoEncontradoException;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -25,7 +31,7 @@ public class Main {
                 System.out.print("Escolha uma opção: ");
                 
                 int opcao = scanner.nextInt();
-                scanner.nextLine(); 
+                scanner.nextLine();
 
                 switch (opcao) {
                     case 1:
@@ -62,24 +68,44 @@ public class Main {
                 }
                 
             } catch (InputMismatchException e) {
-                System.out.println("Erro Crítico: Entrada inválida. Por favor, digite um número inteiro.");
+                System.out.println("Erro de Digitação: Por favor, insira o formato numérico correto.");
                 scanner.nextLine();
                 
             } catch (IllegalArgumentException e) {
                 System.out.println("Erro de Validação (Model): " + e.getMessage());
                 
-            } catch (PacienteNaoEncontradoException e) {
-                System.out.println("Aviso de Busca: " + e.getMessage());
+            } 
+            catch (PacienteNaoEncontradoException e) {
+                System.out.println("Busca Falhou: " + e.getMessage());
+                
+            } catch (ProfissionalNaoEncontradoException e) {
+                System.out.println("Busca Falhou: " + e.getMessage());
+                
+            } catch (PacienteInativoException e) {
+                System.out.println("Bloqueio de Agenda: " + e.getMessage());
+                
+            } catch (HorarioIndisponivelException e) {
+                System.out.println("Conflito de Agenda: " + e.getMessage());
+                
+            } catch (ConsultaInvalidaException e) {
+                System.out.println("Erro de Agendamento: " + e.getMessage());
+                
+            } catch (ConvenioNaoCobreException e) {
+                System.out.println("Aviso de Cobertura: " + e.getMessage());
+                
+            } catch (LimiteParcelasExcedidoException e) {
+                System.out.println("Erro Financeiro: " + e.getMessage());
                 
             } catch (OperacaoInvalidaException e) {
                 System.out.println("Operação Negada: " + e.getMessage());
                 
-            } catch (Exception e) {
+            } 
+            catch (Exception e) {
                 System.out.println("Erro Inesperado Genérico: " + e.getMessage());
                 
             } finally {
                 if (!sistemaAtivo) {
-                    System.out.println("Recursos liberados. Sessão do console finalizada.");
+                    System.out.println("Recursos liberados. Sessão do console finalizada com segurança.");
                 }
             }
         }
