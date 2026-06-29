@@ -3,6 +3,9 @@ package br.com.vidaplena;
 import br.com.vidaplena.model.pessoas.Paciente;
 import br.com.vidaplena.service.ClinicaServico;
 
+import br.com.vidaplena.exceptions.OperacaoInvalidaException;
+import br.com.vidaplena.exceptions.PacienteNaoEncontradoException;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -60,11 +63,20 @@ public class Main {
                 
             } catch (InputMismatchException e) {
                 System.out.println("Erro Crítico: Entrada inválida. Por favor, digite um número inteiro.");
-                scanner.nextLine(); 
+                scanner.nextLine();
+                
             } catch (IllegalArgumentException e) {
-                System.out.println("Erro de Validação: " + e.getMessage());
+                System.out.println("Erro de Validação (Model): " + e.getMessage());
+                
+            } catch (PacienteNaoEncontradoException e) {
+                System.out.println("Aviso de Busca: " + e.getMessage());
+                
+            } catch (OperacaoInvalidaException e) {
+                System.out.println("Operação Negada: " + e.getMessage());
+                
             } catch (Exception e) {
-                System.out.println("Erro de Negócio: " + e.getMessage());
+                System.out.println("Erro Inesperado Genérico: " + e.getMessage());
+                
             } finally {
                 if (!sistemaAtivo) {
                     System.out.println("Recursos liberados. Sessão do console finalizada.");
