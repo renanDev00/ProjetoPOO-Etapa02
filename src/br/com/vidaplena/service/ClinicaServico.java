@@ -3,6 +3,9 @@ package br.com.vidaplena.service;
 import br.com.vidaplena.model.pessoas.Paciente;
 import br.com.vidaplena.model.pessoas.Pessoa;
 
+import br.com.vidaplena.exceptions.OperacaoInvalidaException;
+import br.com.vidaplena.exceptions.PacienteNaoEncontradoException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,10 +24,10 @@ public class ClinicaServico {
         this.cpfsCadastrados = new HashSet<>();
         this.mapaPacientes = new HashMap<>();
     }
-
-    public void registrarPaciente(Paciente paciente) throws Exception {
+    
+    public void registrarPaciente(Paciente paciente) throws OperacaoInvalidaException {
         if (this.cpfsCadastrados.contains(paciente.getCpf())) {
-            throw new Exception("Erro: O CPF " + paciente.getCpf() + " já está cadastrado no sistema.");
+            throw new OperacaoInvalidaException("O CPF " + paciente.getCpf() + " já está cadastrado no sistema.");
         }
         
         this.cpfsCadastrados.add(paciente.getCpf());
@@ -32,11 +35,11 @@ public class ClinicaServico {
         this.todasAsPessoas.add(paciente);
     }
 
-    public Paciente buscarPacientePorCpf(String cpf) throws Exception {
+    public Paciente buscarPacientePorCpf(String cpf) throws PacienteNaoEncontradoException {
         Paciente paciente = this.mapaPacientes.get(cpf);
         
         if (paciente == null) {
-            throw new Exception("Erro: Paciente com CPF " + cpf + " não encontrado.");
+            throw new PacienteNaoEncontradoException("Paciente com CPF " + cpf + " não foi localizado.");
         }
         
         return paciente;
