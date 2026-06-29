@@ -24,8 +24,9 @@ public class ClinicaServico {
         this.cpfsCadastrados = new HashSet<>();
         this.mapaPacientes = new HashMap<>();
     }
-    
-    public void registrarPaciente(Paciente paciente) throws OperacaoInvalidaException {
+
+    public void registrarPaciente(Paciente paciente) throws Exception {
+        
         if (this.cpfsCadastrados.contains(paciente.getCpf())) {
             throw new OperacaoInvalidaException("O CPF " + paciente.getCpf() + " já está cadastrado no sistema.");
         }
@@ -35,7 +36,7 @@ public class ClinicaServico {
         this.todasAsPessoas.add(paciente);
     }
 
-    public Paciente buscarPacientePorCpf(String cpf) throws PacienteNaoEncontradoException {
+    public Paciente buscarPacientePorCpf(String cpf) throws Exception {
         Paciente paciente = this.mapaPacientes.get(cpf);
         
         if (paciente == null) {
